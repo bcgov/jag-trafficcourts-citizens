@@ -85,6 +85,43 @@ services:
       - 8088:8088
     networks:
       - traffic-court-net
+
+
+#############################################################################################
+###                                  REDIS & REDIS COMMANDER                              ###
+#############################################################################################  
+  redis:
+    container_name: redis
+    image: redis
+    hostname: ${REDIS__HOST}
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS__PASSWORD}"]
+    ports:
+      - "6379:6379"
+    networks:
+      - traffic-court-net
+    environment: 
+      - REDIS_PASSWORD="${REDIS__PASSWORD}"
+    volumes:
+      - data-redis:/data
+    restart: always
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander
+    restart: always
+    depends_on: [redis]
+    networks: 
+      - traffic-court-net
+    ports:
+      - "8085:8081"
+    environment:
+      - REDIS_HOST=${REDIS__HOST}
+      - REDIS_PASSWORD="${REDIS__PASSWORD}"
+
+volumes:
+  data-redis:
+
   
 networks:
   traffic-court-net:

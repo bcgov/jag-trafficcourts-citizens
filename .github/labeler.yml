@@ -10,3 +10,7 @@
 # Add 'DevOps' to changes in openshift folder
 'DevOps':
   - infrastructure/**/*
+
+  # Add 'Docker Compose' to changes in openshift folder
+'Docker Compose':
+  - docker-compose.yml
