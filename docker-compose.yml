@@ -30,7 +30,7 @@ services:
       context: ./src/frontend/citizen-portal
       args: 
         USE_MOCK_SERVICES: "false"
-        USE_KEYCLOAK: "true"
+        USE_KEYCLOAK: "false"
         API_URL: ${API_URL}
         KEYCLOAK_URL: ${KEYCLOAK_URL}
         KEYCLOAK_REALM: ${KEYCLOAK_REALM}
